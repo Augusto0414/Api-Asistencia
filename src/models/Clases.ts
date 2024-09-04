@@ -1,7 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, OneToMany } from "typeorm";
 import { Profesor } from "./Profesor";
 import { Asistencia } from "./Asistencia";
-import { Session } from "./Sesion";
 
 @Entity("clases")
 export class Clases {
@@ -19,9 +18,6 @@ export class Clases {
 
   @OneToMany(() => Asistencia, (attendance) => attendance.classEntity)
   attendances: Asistencia[];
-
-  @OneToMany(() => Session, (session) => session.classEntity)
-  sessions: Session[];
 
   @CreateDateColumn({ type: "timestamp" })
   createdAt: Date;

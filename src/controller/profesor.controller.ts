@@ -26,4 +26,30 @@ export class ProfesorController {
       res.status(500).send({ message: "Error inesperado en el backend" });
     }
   }
+  static async updateProfesor(req: Request, res: Response): Promise<void> {
+    try {
+      const id = req.params.id;
+      const { firstName, lastName, email } = req.body;
+      const updatedProfesor = await profesorService.updateProfesor(id, { firstName, lastName, email });
+      if (!updatedProfesor) {
+        res.status(404).send({ message: "Profesor no encontrado" });
+        return;
+      }
+      res.send(updatedProfesor);
+    } catch (error) {
+      console.error("Error al actualizar profesor: ", error);
+      res.status(500).send({ message: "Error inesperado en el backend" });
+    }
+  }
+
+  static async deleteProfesor(req: Request, res: Response): Promise<void> {
+    try {
+      const id = req.params.id;
+      await profesorService.deleteProfesor(id);
+      res.status(204).send();
+    } catch (error) {
+      console.error("Error al eliminar profesor: ", error);
+      res.status(500).send({ message: "Error inesperado en el backend" });
+    }
+  }
 }

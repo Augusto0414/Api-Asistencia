@@ -5,7 +5,9 @@ import { Clases } from "../models";
 export class ClasesService {
   private clasesRepository = pool.getRepository(Clases);
   async getAllClases(): Promise<Clases[]> {
-    return await this.clasesRepository.find();
+    return await this.clasesRepository.find({
+      relations: ["professor", "attendances"],
+    });
   }
   async createClase(dataClasss: Partial<Clases>): Promise<Clases> {
     const newClass = this.clasesRepository.create(dataClasss);

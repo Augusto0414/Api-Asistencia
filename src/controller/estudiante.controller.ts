@@ -28,4 +28,32 @@ export class EstudianteController {
       res.status(500).send({ message: "Error al obtener estudiantes", error });
     }
   }
+
+  static async updateStudent(req: Request, res: Response): Promise<any> {
+    try {
+      const id = req.params.id;
+      const { firstName, lastName, email } = req.body;
+
+      if (!firstName || !lastName || !email) {
+        return res.status(400).send({ message: "Todos los campos son requeridos" });
+      }
+
+      const updatedStudent = await estudianteService.updateStudent(id, { firstName, lastName, email });
+      res.send(updatedStudent);
+    } catch (error) {
+      console.error("Error al actualizar estudiante:", error);
+      res.status(500).send({ message: "Error al actualizar estudiante", error });
+    }
+  }
+
+  static async deleteStudent(req: Request, res: Response): Promise<any> {
+    try {
+      const id = req.params.id;
+      await estudianteService.deleteStudent(id);
+      res.status(204).send();
+    } catch (error) {
+      console.error("Error al eliminar estudiante:", error);
+      res.status(500).send({ message: "Error al eliminar estudiante", error });
+    }
+  }
 }
