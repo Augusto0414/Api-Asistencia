@@ -1,5 +1,3 @@
-Aquí tienes una versión corregida y mejorada del README:
-
 ```markdown:README.md
 # Documentación de la API
 
