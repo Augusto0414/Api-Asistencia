@@ -5,11 +5,11 @@ dotenv.config();
 
 const pool: DataSource = new DataSource({
   type: "postgres",
-  username: process.env.USER,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
-  port: parseInt(process.env.PORT_DATABASE as string, 10),
+  username: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: parseInt(process.env.DB_PORT as string, 10),
   entities: Object.values(models),
   synchronize: true,
   logging: true,
